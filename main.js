@@ -29,20 +29,36 @@ import { nanoid } from "https://cdn.skypack.dev/nanoid";
 
 const input = document.getElementById("taskInput");
 const ul = document.getElementById("taskList");
+const check = document.getElementById("check");
 
 function addTask() {
   const taskText = input.value.trim();
-
   if (taskText) {
-    const id = nanoid();
     const li = document.createElement("li");
-    li.textContent = taskText;
-    li.classList.add(id);
-    ul.appendChild(li);
+    li.innerHTML = `
+    <p>${taskText}</p>
+    <input id="check" type="checkbox">
+    <button type="button" id=""del>delete</button>
+    `;
+    li.classList.add(nanoid())
 
+    ul.appendChild(li);
     input.value = "";
+    li.addEventListener(`click`, (event) => {
+      if (event.target.tagName === `BUTTON`) {
+        const li = event.target.closest(`LI`);
+        li.remove();
+      }
+    });
+    li.addEventListener(`change`, (event) => {
+      if (event.target.tagName === `INPUT`) {
+        const p = event.target.closest('li').querySelector('p');
+        p.style.textDecoration = "line-through";
+      }
+    });
   }
 }
+
 const btn = document.getElementById("addTaskBtn");
 
 btn.addEventListener("click", addTask);

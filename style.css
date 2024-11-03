@@ -1,0 +1,15 @@
+
+li {
+    display: flex;
+    max-width: 200px;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+
+button {
+    background-color: #141414;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
